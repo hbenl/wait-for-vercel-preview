@@ -229,7 +229,8 @@ const waitForDeploymentToStart = async ({
         return deployment;
       }
 
-      throw new Error(`no ${actorName} deployment found`);
+      const deployers = deployments.map(d => d.creator.login);
+      throw new Error(`no ${actorName} deployment found (${JSON.stringify(deployers)})`);
     } catch (e) {
       console.log(
         `Could not find any deployments for actor ${actorName} (${inspect(e)}), retrying (attempt ${
