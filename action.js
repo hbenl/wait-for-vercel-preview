@@ -4,6 +4,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const axios = require('axios');
 const setCookieParser = require('set-cookie-parser');
+const { inspect } = require('util');
 
 const calculateIterations = (maxTimeoutSec, checkIntervalInMilliseconds) =>
   Math.floor(maxTimeoutSec / (checkIntervalInMilliseconds / 1000));
@@ -231,7 +232,7 @@ const waitForDeploymentToStart = async ({
       throw new Error(`no ${actorName} deployment found`);
     } catch (e) {
       console.log(
-        `Could not find any deployments for actor ${actorName}, retrying (attempt ${
+        `Could not find any deployments for actor ${actorName} (${inspect(e)}), retrying (attempt ${
           i + 1
         } / ${iterations})`
       );
