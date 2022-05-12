@@ -229,7 +229,7 @@ const waitForDeploymentToStart = async ({
         return deployment;
       }
 
-      const deployers = deployments.map(d => d.creator.login);
+      const deployers = deployments.data.map(d => d.creator.login);
       throw new Error(`no ${actorName} deployment found (${JSON.stringify(deployers)})`);
     } catch (e) {
       console.log(
